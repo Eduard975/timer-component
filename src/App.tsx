@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
+import { Timer } from './components/Timer';
 import './App.css';
+
 
 function App() {
   return (
@@ -10,6 +12,9 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+
+        <Timer title="bobi" endTime={23}></Timer>
+
         <a
           className="App-link"
           href="https://reactjs.org"
