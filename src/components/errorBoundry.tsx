@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-export class TimerErrorBoundry extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
+export class TimerErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
     constructor(props: any) {
         super(props);
         this.state = { hasError: false };

@@ -1,4 +1,5 @@
 import { EndTimeOutOfBoundsError } from "./customError";
+import "../css/component.css"
 
 export type MyTimerProps = { title: string; endTime: number; elapsedTime?: number };
 
@@ -22,7 +23,7 @@ export const Timer = ({ title, endTime, }: MyTimerProps) => {
     const { hours, minutes, seconds } = calcTime(endTime);
 
     return (
-        <div>
+        <div className="container">
             <h1>{title}</h1>
             <p>
                 {hours}h {minutes}m {seconds}s remaining
