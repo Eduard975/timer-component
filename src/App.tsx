@@ -1,29 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Timer } from './components/Timer';
+import { Timer } from './components/timer';
 import './App.css';
+import { TimerErrorBoundry } from './components/errorBoundry';
 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-
-        <Timer title="bobi" endTime={23}></Timer>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TimerErrorBoundry>
+        <Timer title="bobi" endTime={1000}></Timer>
+      </TimerErrorBoundry>
     </div>
   );
 }
