@@ -20,13 +20,18 @@ export const Timer = ({ title, endTime, }: MyTimerProps) => {
         throw new EndTimeOutOfBoundsError("EndTime can't exceed 3599 seconds");
     }
 
-    const { hours, minutes, seconds } = calcTime(endTime);
+    const { minutes, seconds } = calcTime(endTime);
 
     return (
         <div className="container">
-            <h1>{title}</h1>
-            <p>
-                {hours}h {minutes}m {seconds}s remaining
+            <p className="timer-top-buttom ">
+                {title}
+            </p>
+            <p className="timer">
+                {minutes}:{seconds}
+            </p>
+            <p className="timer-top-buttom">
+                {minutes}:{seconds} Left
             </p>
         </div>
     );

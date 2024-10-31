@@ -4,8 +4,17 @@
     align-items: center;
     background-color: #26273d;
     border-radius: 25px;
-    color: #fff;
     font-family: sans-serif;
     width: fit-content;
     padding: 20px;
+}
+
+.timer-top-buttom {
+    color: #a2a4cb;
+    font-size: medium;
+}
+
+.timer {
+    color: #ffffff;
+    font-size: x-large;
 }
