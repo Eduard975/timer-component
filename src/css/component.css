@@ -14,9 +14,18 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    font-family: sans-serif;
     width: 100%;
     padding: 20px;
+}
+
+.timer-button {
+    color: #ffffff;
+    text-align: center;
+    display: inline-block;
+    background-color: #26273d;
+    border: 1px solid #606170;
+    border-radius: 15px;
+    padding: 8px 15px;
 }
 
 .timer-top-buttom {

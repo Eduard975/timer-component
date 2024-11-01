@@ -64,9 +64,9 @@ export const Timer = ({ title, endTime }: MyTimerProps) => {
             </p>
 
             <div className="buttons-row">
-                <button>Start</button>
-                <button>Pause</button>
-                <button>Stop</button>
+                <button className="timer-button">Start</button>
+                <button className="timer-button">Pause</button>
+                <button className="timer-button">Stop</button>
             </div>
 
         </div>
