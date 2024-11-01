@@ -9,6 +9,16 @@
     padding: 20px;
 }
 
+.buttons-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: sans-serif;
+    width: 100%;
+    padding: 20px;
+}
+
 .timer-top-buttom {
     color: #a2a4cb;
     font-size: medium;
