@@ -25,6 +25,11 @@ export function useTimer(endTime: number, elapsedTime?: number) {
         (elapsedTime ?? 0) * 1000
     );
 
+    const green = "#67cb88"
+    const red = "#cb6767"
+
+    const [progressColor, setProgressColor] = useState(green)
+
     useEffect(() => {
         if (!timerStarted) {
             return;
@@ -38,10 +43,23 @@ export function useTimer(endTime: number, elapsedTime?: number) {
     }, [timerStarted, elapsedTimeMs])
 
     useEffect(() => {
-        if (elapsedTimeMs + startTime >= endTimeMs) {
+        if (elapsedTimeMs >= endTimeMs - startTime) {
             setTimerStarted(false);
         }
     }, [elapsedTimeMs, endTimeMs, startTime]);
+
+    const progressPercent = (elapsedTimeMs / (endTime * 1000)) * 100;
+
+    useEffect(() => {
+        let iId: any;
+        if (progressPercent > 99) {
+            iId = setInterval(() => {
+                setProgressColor((prevColor) => prevColor === green ? red : green);
+            }, 200);
+        }
+
+        return () => clearInterval(iId)
+    }, [progressColor, progressPercent])
 
 
     const start = useCallback(() => {
@@ -58,16 +76,15 @@ export function useTimer(endTime: number, elapsedTime?: number) {
         setEndTime(endTime * 1000 + Date.now())
         setStartTime(Date.now())
         setElapsedTimeMs((elapsedTime ?? 0) * 1000)
+        setProgressColor(green)
         setTimerStarted(true)
     }, [endTime])
 
-    const timeLeftMs = endTimeMs - elapsedTimeMs - startTime;
-
     const elapsedTimeFormatted = formatTime("mm:ss", elapsedTimeMs)
+
+    const timeLeftMs = endTimeMs - elapsedTimeMs - startTime;
     const timeLeftFormatted = formatTime("mm:ss", timeLeftMs)
 
-    // de returnat const Timer%
-    const percent = (elapsedTimeMs / (endTime * 1000)) * 100;
 
-    return { elapsedTimeFormatted, timeLeftFormatted, elapsedTimeMs, timeLeftMs, percent, start, stop, reset }
+    return { elapsedTimeFormatted, timeLeftFormatted, elapsedTimeMs, timeLeftMs, progressPercent, progressColor, start, stop, reset }
 }

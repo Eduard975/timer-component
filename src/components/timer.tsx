@@ -16,14 +16,14 @@ export const Timer = ({ title, endTime, elapsedTime }: MyTimerProps) => {
         throw new EndTimeOutOfBoundsError("EndTime can't exceed 3599 seconds");
     }
 
-    const { elapsedTimeFormatted, timeLeftFormatted, percent, start, stop, reset } = useTimer(endTime, elapsedTime);
-    console.log(percent)
+    const { elapsedTimeFormatted, timeLeftFormatted, progressPercent, progressColor, start, stop, reset } = useTimer(endTime, elapsedTime);
+
     return (
         <div className="container">
             <div
                 className="progress"
                 style={{
-                    background: `conic-gradient(#67cb88 ${percent}%, #545576 0)`,
+                    background: `conic-gradient(${progressColor} ${progressPercent}%, #545576 0)`,
                 }}
             >
                 <div className="circle-content">

@@ -10,7 +10,7 @@
 }
 
 .progress {
-    width: 200px;
+    width: 250px;
     aspect-ratio: 1;
     border-radius: 50%;
     display: flex;
@@ -21,7 +21,7 @@
 }
 
 .progress:after {
-    width: calc(200px * .9);
+    width: calc(250px * .9);
     aspect-ratio: 1;
     content: "";
     position: absolute;
@@ -42,7 +42,7 @@
 
 .timer-top {
     color: #a2a4cb;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 5px 0;
 }
 
