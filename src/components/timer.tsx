@@ -1,21 +1,13 @@
 import { EndTimeOutOfBoundsError } from "./customError";
 import "../css/component.css"
 import { useEffect, useState } from "react";
-import { time } from "console";
+import { useTimer } from "../hooks/timer";
 
 export type MyTimerProps = { title: string; endTime: number; elapsedTime?: number };
 
-function calcTimeFromMS(time: number) {
-    time = (time / 1000);
-    const minutes = ((time % 3600) / 60);
-    const seconds = (time % 60);
 
 
-    return `${minutes > 9 ? minutes.toFixed(0) : `0${minutes.toFixed(0)}`}`
-        + `:${seconds > 9 ? seconds.toFixed(0) : `0${seconds.toFixed(0)}`}`;
-}
-
-export const Timer = ({ title, endTime }: MyTimerProps) => {
+export const Timer = ({ title, endTime, elapsedTime }: MyTimerProps) => {
     if (endTime < 0) {
         throw new EndTimeOutOfBoundsError("EndTime can't be negative");
     }
@@ -24,51 +16,28 @@ export const Timer = ({ title, endTime }: MyTimerProps) => {
         throw new EndTimeOutOfBoundsError("EndTime can't exceed 3599 seconds");
     }
 
-    const [timerStarted, setTImerStarted] = useState(true)
-    const [startTime, setStartTime] = useState(Date.now())
-    const [currentTime, setCurrentTime] = useState(Date.now())
-    const endTimeMs = endTime * 1000 + startTime;
-
-    useEffect(() => {
-        if (!timerStarted) {
-            return;
-        }
-
-        const iId = setInterval(() => {
-            setCurrentTime(Date.now())
-        }, 1000);
-
-        return () => clearInterval(iId)
-    }, [timerStarted])
-
-    useEffect(() => {
-        if (currentTime >= endTimeMs) {
-            setTImerStarted(false)
-        }
-
-    }, [currentTime, endTimeMs])
-
+    const { elapsedTimeFormatted, timeLeftFormatted, percent, start, stop, reset } = useTimer(endTime, elapsedTime);
+    console.log(percent)
     return (
         <div className="container">
-            <p className="timer-top-buttom ">
-                {title}
-            </p>
-            <p className="timer">
-                {
-                    calcTimeFromMS((currentTime - startTime))
-                    //(endTime - (endTimeMs - currentTime) / 1000).toFixed(0)
-                }
-            </p>
-            <p className="timer-top-buttom">
-                {calcTimeFromMS((endTimeMs - currentTime))} Left
-            </p>
-
-            <div className="buttons-row">
-                <button className="timer-button">Start</button>
-                <button className="timer-button">Pause</button>
-                <button className="timer-button">Stop</button>
+            <div
+                className="progress"
+                style={{
+                    background: `conic-gradient(#67cb88 ${percent}%, #545576 0)`,
+                }}
+            >
+                <div className="circle-content">
+                    <p className="timer-top">{title}</p>
+                    <p className="timer">{elapsedTimeFormatted}</p>
+                    <p className="timer-bottom">{timeLeftFormatted} Left</p>
+                </div>
             </div>
 
+            <div className="buttons-row">
+                <button className="timer-button" onClick={start}>Start</button>
+                <button className="timer-button" onClick={stop}>Stop</button>
+                <button className="timer-button" onClick={reset}>Reset</button>
+            </div>
         </div>
     );
 };

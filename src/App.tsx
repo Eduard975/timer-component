@@ -10,9 +10,11 @@ function App() {
       <div className='App-header'>Task timer</div>
       <div className="App">
         <TimerErrorBoundary>
-          <Timer title="Title from Props" endTime={3000}></Timer>
+          <Timer title="Title from Props" endTime={15} ></Timer>
         </TimerErrorBoundary>
       </div>
+
+
     </div>
   );
 }
