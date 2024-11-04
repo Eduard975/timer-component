@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 export function useTimeS() {
-    const [timeS, setTimeS] = useState<number>(0);
+  const [timeS, setTimeS] = useState(0);
 
-    const handleTimeSecondsChange = (seconds: number) => {
-        setTimeS(seconds);
-    };
+  const handleTimeSecondsChange = (seconds: number) => {
+    setTimeS(seconds);
+  };
 
-    return { timeS, handleTimeSecondsChange }
+  return { timeS, handleTimeSecondsChange };
 }
