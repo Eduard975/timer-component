@@ -37,7 +37,7 @@ function App() {
           marginRight: '75px',
           width: '400px'
         }}>
-          <p>End Time input can accept up to 60:60 time if you wish to test the throw on more than 59:59 feature</p>
+          <p>The End Time input can accept values up to 60:60, allowing you to test the feature that throws an error for times exceeding 59:59.</p>
           <p>Title input:</p>
           <input
             type="text"

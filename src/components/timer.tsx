@@ -38,15 +38,15 @@ export type MyTimerProps = {
  */
 export const Timer = ({ title, endTime, elapsedTime }: MyTimerProps) => {
     if (endTime < 0) {
-        throw new Error("EndTime can't be negative")
+        throw new Error("End Time can't be negative")
     }
 
     if (endTime >= 3600) {
-        throw new Error("EndTime can't exceed 59 minutes and 59 seconds")
+        throw new Error("End Time can't exceed 59 minutes and 59 seconds")
     }
 
     if (elapsedTime && elapsedTime > endTime) {
-        throw new Error("EndTime can't be lower than ElapsedTime")
+        throw new Error("End Time can't be lower than ElapsedTime")
     }
 
     const { elapsedTimeFormatted, timeLeftFormatted, progressPercent, progressColor, start, pause, reset } = useTimer(endTime, elapsedTime)

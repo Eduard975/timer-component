@@ -14,7 +14,6 @@ export function useTimer(endTime: number, elapsedTime?: number) {
     const [endTimeMs, setEndTime] = useState(endTime * 1000 + startTime)
     const [progressColor, setProgressColor] = useState(green)
 
-
     const timeLeftMs = endTimeMs - elapsedTimeMs - startTime;
 
     const progressFraction = (elapsedTimeMs / (endTime * 1000));
