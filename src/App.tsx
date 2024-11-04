@@ -11,7 +11,10 @@ function App() {
   const [elapsedTimeS, setElapsedTimeS] = useState<number>(0);
 
   // max time limit intentionally set on 60 for testing 
-  const timeLimits = [0, 60]
+  const endTimeLimits = [0, 60]
+
+  const timeLimits = [0, 59]
+
 
   const handleEndTimeSecondsSecondsChange = (seconds: number) => {
     setEndTimeS(seconds);
@@ -38,7 +41,7 @@ function App() {
           <p >End Time input can accept up to 60:60 time if you wish to test the throw on more than 59:59 feature</p>
           <TimeInput
             title="End Time Input(mm:ss):"
-            timeLimits={timeLimits}
+            timeLimits={endTimeLimits}
             onTotalSecondsChange={handleEndTimeSecondsSecondsChange}
           />
 
