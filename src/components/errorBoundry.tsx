@@ -1,18 +1,32 @@
-import { Component } from "react";
+import { Component, ReactNode, ErrorInfo } from "react";
 
-export class TimerErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
-    constructor(props: any) {
+type TimerErrorBoundaryProps = {
+    children: ReactNode;
+}
+
+type TimerErrorBoundaryState = {
+    hasError: boolean;
+    errorMessage?: string;
+}
+
+export class TimerErrorBoundary extends Component<TimerErrorBoundaryProps, TimerErrorBoundaryState> {
+    constructor(props: TimerErrorBoundaryProps) {
         super(props);
-        this.state = { hasError: false };
+        this.state = { hasError: false, errorMessage: undefined };
     }
 
-    static getDerivedStateFromError() {
-        return { hasError: true };
+    static getDerivedStateFromError(error: Error) {
+        return { hasError: true, errorMessage: error.message };
     }
 
     render() {
         if (this.state.hasError) {
-            return <h1>Timpul introdus nu este valid</h1>;
+            return (
+                <div style={{ backgroundColor: "#fdd", padding: "1rem", borderRadius: "5px" }}>
+                    <h1 style={{ color: "red" }}>ERROR</h1>
+                    <p>{this.state.errorMessage || "An unexpected error occurred."}</p>
+                </div>
+            );
         }
 
         return this.props.children;
