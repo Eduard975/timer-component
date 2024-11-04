@@ -1,28 +1,41 @@
 import "../css/component.css"
-import { useEffect, useState } from "react";
 import { useTimer } from "../hooks/timer";
 
-export type MyTimerProps = { title: string; endTime: number; elapsedTime?: number };
+/**
+ * Props for the Timer component.
+ */
+export type MyTimerProps = {
+    /** Title displayed at the top of the timer */
+    title: string;
 
-/*
-    Timer Component
+    /**
+     * The total duration for the timer in seconds.
+     * Must be between 0 and 3599 (59 minutes and 59 seconds).
+     */
+    endTime: number;
 
-    The Timer component displays a countdown timer with start, pause, and reset functionality.
-    It visually represents the progress of the timer using a circular progress indicator which starts
-    flashing colors when its finished.
+    /**
+     * The time that has already elapsed in seconds before the timer starts.
+     * This value is optional and must not exceed the endTime if provided.
+     */
+    elapsedTime?: number
+};
 
-    Props:
-    - title (string): The title to be displayed at the top of the timer.
-    - endTime (number): The maximum duration for the timer, specified in seconds. This value must be between 0 and 3599 seconds.
-    - elapsedTime (number, optional): The amount of time (in seconds) that has already elapsed before the timer starts. 
-                                      If provided, this value must not exceed the endTime.
-
-    Errors:
-    - Throws an error if endTime is negative.
-    - Throws an error if endTime exceeds 59 minutes and 59 seconds.
-    - Throws an error if elapsedTime is provided and is greater than endTime.
-*/
-
+/**
+ * Timer Component
+ *
+ * Displays both a countup timer and visually represents its progress with a circular indicator 
+ * that fills up as time goes. When the Timer ends, the indicator will start flashing colors.
+ * The time left until the timer ends is also displayed.
+ *
+ * @throws {Error} If `endTime` is negative, or exceeds 3599 seconds, or if `elapsedTime` is greater than `endTime`.
+ * @returns {JSX.Element} The rendered Timer component.
+ *
+ * @example
+ * ```tsx
+ * <Timer title="Title from props" endTime={200} />
+ * ```
+ */
 export const Timer = ({ title, endTime, elapsedTime }: MyTimerProps) => {
     if (endTime < 0) {
         throw new Error("EndTime can't be negative")
